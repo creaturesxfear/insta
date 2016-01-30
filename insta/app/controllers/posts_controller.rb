@@ -1,15 +1,18 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   def index
     @posts = Post.all
   end
 
   def new
-    @post = Post.new
+    @post = current_user.posts.build
   end
 
   def create
-    if @post = Post.create(post_params)
+    @post = current_user.posts.build(post_params)
+
+    if @post.save
       flash[:success] = "Your post has been created!"
       redirect_to posts_path
     else
