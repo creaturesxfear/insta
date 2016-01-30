@@ -10,9 +10,11 @@ class PostsController < ApplicationController
 
   def create
     if @post = Post.create(post_params)
-    redirect_to posts_path
+      flash[:success] = "Your post has been created!"
+      redirect_to posts_path
     else
-    render :new
+      flash.now[:alert] = "Your new post couldn't be created, please check the form."
+      render :new
     end
   end
 
@@ -24,16 +26,23 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-    redirect_to posts_path
+      flash[:success] = "Post Updated."
+      redirect_to posts_path
     else
-    render :edit
+      flash.now[:alert] = "Update failed. Please check the form."
+      render :edit
     end
 
   end
 
   def destroy
-    @post.destroy
-    redirect_to posts_path
+    if @post.destroy
+      flash[:success] = "Post Deleted"
+      redirect_to posts_path
+    else
+      flash.now[:alert] = "Could not delete your post"
+      render :edit
+    end
   end
 
 private
