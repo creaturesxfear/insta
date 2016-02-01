@@ -1,13 +1,15 @@
 class CommentsController < ApplicationController
-  before_action set_post
+  before_action :set_post
 
   def create
-    @comment = @post.comment.build(comment_params)
+    @comment = @post.comments.build(comment_params)
     @comment.user_id = current_user.id
 
     if @comment.save
-      flash[:success] = "Comment saved."
-      redirect_to :back
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.js
+      end
     else
       flash[:alert] = "Something went wrong, please check the form."
       render root_path
@@ -17,9 +19,13 @@ class CommentsController < ApplicationController
   def destroy
     @comment = @post.comments.find(params[:id])
 
-    @comment.destroy
-    flash[:success] = "Comment Deleted."
-    redirect_to root_path
+    if @comment.user_id == current_user.id
+      @comment.delete
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.js
+      end
+    end
   end
 
   private
