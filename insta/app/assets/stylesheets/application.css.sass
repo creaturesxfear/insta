@@ -1,12 +1,19 @@
 @import "bootstrap-sprockets"
 @import "bootstrap"
 
+html
+  height: 100vh
+
 body
   background-color: #fafafa
   font-family: proxima-nova, 'Helvetica Neue', Arial, Helvetica, sans-serif
 
 
 /* ## NAVBAR CUSTOMISATIONS ## */
+.navbar
+  margin-bottom: 0
+.alert
+  margin-bottom: 0
 
 .navbar-brand
   a
@@ -139,3 +146,36 @@ body
 .edit-links
   margin-top: 20px
   margin-bottom: 40px
+
+/*********** Registration ***********************/
+
+.registration-bg
+  padding-top: 4em
+  height: 100vh
+  background-image: url('/images/open.jpg')
+  background-size: cover
+
+.panel-body
+  .input-lg
+    width: 100%
+    margin-bottom: 3rem
+
+.log-in
+  margin-left: auto
+  margin-right: auto
+  text-align: center
+  border: none
+
+.panel
+  border-radius: 8px
+
+.panel-heading
+  h1
+    text-align: center
+
+/************* Log-in ****************************/
+.login-bg
+  padding-top: 4em
+  height: 100vh
+  background-image: url('/images/login.jpg')
+  background-size: cover
